@@ -5,19 +5,15 @@ class TodosController < ApplicationController
     @todos = Todo.all
   end
 
-  def show
-  end
+  def show; end
+  def edit; end
 
   def new
     @todo = Todo.new
   end
 
-  def edit
-  end
-
   def create
     @todo = Todo.new(todo_params)
-
     respond_to do |format|
       if @todo.save
         format.html { redirect_to todo_url(@todo), notice: "Todo was successfully created." }
@@ -31,6 +27,7 @@ class TodosController < ApplicationController
     respond_to do |format|
       if @todo.update(todo_params)
         format.html { redirect_to todo_url(@todo), notice: "Todo was successfully updated." }
+        format.js
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -39,7 +36,6 @@ class TodosController < ApplicationController
 
   def destroy
     @todo.destroy
-
     respond_to do |format|
       format.html { redirect_to todos_url, notice: "Todo was successfully destroyed." }
     end
